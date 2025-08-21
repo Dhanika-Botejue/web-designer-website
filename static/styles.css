@@ -1,0 +1,151 @@
+/* Mobile-first responsive styles matching Figma look */
+:root{
+	--bg-overlay: rgba(4, 7, 19, 0.45);
+	--card-bg: rgba(255,255,255,0.92);
+	--text: #e9edff;
+	--muted: #c9d3ff;
+	--ink: #0e1330;
+	--pill:#e9ecf4;
+	--pill-active:#171c3b;
+	--accent:#ff7a7a;
+}
+
+html,body{
+	height:100%;
+}
+body{
+	margin:0;
+	min-height:100svh;
+	font-family:"Outfit", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+	color:var(--text);
+	background-size:cover;
+	background-position:center center;
+	background-attachment:fixed;
+	/* add subtle dim so text is legible over photos */
+	position:relative;
+}
+/* Per-page background images set via body class to avoid inline styles */
+body.page-home{ background-image:url('/images/bg_home.jpg'); }
+body.page-about{ background-image:url('/images/bg_about.jpg'); }
+body.page-projects{ background-image:url('/images/bg_projects.jpg'); }
+body.page-connect{ background-image:url('/images/bg_connect.jpg'); }
+body::before{
+	content:"";
+	position:fixed;
+	inset:0;
+	background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35) 40%, rgba(0,0,0,.6));
+	z-index:-1;
+}
+
+.site-header{ padding: max(12px, env(safe-area-inset-top)) clamp(12px, 2vw, 24px) clamp(12px, 2vw, 24px); display:flex; justify-content:center; }
+
+.nav{
+	background:rgba(255,255,255,0.65);
+	backdrop-filter:saturate(140%) blur(12px);
+	border-radius:999px;
+	padding:8px;
+	display:inline-flex;
+	gap:14px;
+	box-shadow:0 6px 24px rgba(0,0,0,.25);
+}
+.nav .tab{
+	text-decoration:none;
+	color:#2a3157;
+	background:var(--pill);
+	padding:10px 18px;
+	border-radius:999px;
+	font-weight:600;
+	font-size:16px;
+}
+.nav .tab.active{
+	background:var(--pill-active);
+	color:#fff;
+}
+
+.container{ width:min(100%, 1100px); margin:0 auto; padding: clamp(16px, 4vw, 28px); }
+
+/* Headings */
+.hero-title{
+	font-size: clamp(40px, 8vw, 88px);
+	line-height:1.05;
+	margin: clamp(8px, 4vw, 18px) 0 8px;
+	font-weight:800;
+}
+.lead{
+	color: var(--muted);
+	font-size: clamp(18px, 3.5vw, 26px);
+	line-height:1.6;
+	max-width: 46ch;
+}
+.lead strong{ color:#fff; }
+
+/* Sections */
+.section-title{ font-size: clamp(28px, 5.5vw, 54px); font-weight:800; margin: 28px 0 10px; }
+
+.skills{
+	display:grid;
+	grid-template-columns: repeat(2, minmax(0,1fr));
+	gap: 18px 16px;
+	margin-top:14px;
+}
+@media (min-width: 520px){ .skills{ grid-template-columns: repeat(3, 1fr);} }
+@media (min-width: 880px){ .skills{ grid-template-columns: repeat(4, 1fr);} }
+
+.skill{
+	background:#fff;
+	color:#111827;
+	border-radius:999px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	padding:18px 10px;
+	box-shadow: 0 10px 20px rgba(0,0,0,.18);
+}
+.skill img{ width:60%; height:auto; aspect-ratio:1/1; object-fit:contain; }
+.skill .name{ margin-top:10px; font-weight:800; font-size: clamp(14px, 3.2vw, 18px); }
+
+/* Cards */
+.card{
+	background: var(--card-bg);
+	color:#22284a;
+	border-radius:28px;
+	padding: clamp(18px, 4vw, 28px);
+	box-shadow: 0 14px 30px rgba(0,0,0,.22);
+	backdrop-filter: blur(4px);
+}
+.card h2{ font-size: clamp(28px, 5vw, 44px); margin: 0 0 8px; color:#111a3c; }
+.card p{ font-size: clamp(16px, 3.2vw, 22px); line-height:1.7; margin: 10px 0; }
+
+.projects{ display:grid; gap:16px; }
+
+.project-card{ position:relative; }
+.project-link{
+	text-decoration:none;
+	color:inherit;
+	display:block;
+	position:relative;
+}
+.project-link:hover .go{
+	background:#ffb3c1;
+	transform:scale(1.05);
+}
+.project-card .go{
+	position:absolute; right:16px; top:16px;
+	width:44px; height:44px; border-radius:50%;
+	background:#ffdfe6; display:grid; place-items:center;
+	transition:all 0.2s ease;
+}
+.project-card .go::after{ content:"→"; font-weight:800; color:#1c2248; }
+
+.contact-list{ display:grid; gap:16px; }
+.contact-list a{ color:#121a3c; text-decoration:underline; font-weight:800; font-size: clamp(18px, 3.8vw, 24px); }
+
+.footer{ color:#aeb6e6; text-align:center; padding:40px 0; font-size:14px; }
+
+/* Larger screens - scale spacing */
+@media (min-width: 1024px){
+	.container{ padding: 40px; }
+	.nav .tab{ font-size:18px; padding:12px 20px; }
+}
+
